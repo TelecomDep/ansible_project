@@ -1,0 +1,13 @@
+---
+- name: Set up development environment for students
+  hosts: all
+  become: yes
+  roles:
+    - role: student
+    - role: base_soft
+    - role: database
+    - role: virt
+    - role: docker
+    - role: matlab
+    - role: pct
+    - role: time

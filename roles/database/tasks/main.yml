@@ -1,0 +1,47 @@
+---
+- name: Install database clients
+  apt:
+    name:
+      - "postgresql-client"
+      - "mysql-client"
+      - "sqlite3"
+    state: present
+    update_cache: yes
+  when:
+    - install_postgresql_client
+    - install_mysql_client
+    - install_sqlite
+
+- name: Install PostgreSQL server (if enabled)
+  apt:
+    name: "postgresql"
+    state: present
+  when: install_postgresql_server
+
+- name: Install MySQL server (if enabled)
+  apt:
+    name: "mysql-server"
+    state: present
+  when: install_mysql_server
+
+- name: Install phpMyAdmin (if enabled)
+  apt:
+    name: "phpmyadmin"
+    state: present
+  when: install_phpmyadmin
+
+- name: Install DBeaver (if enabled)
+  community.general.snap:
+    name: "dbeaver-ce"
+    state: present
+  when: install_dbeaver
+
+- name: Ensure services are running (if applicable)
+  service:
+    name: "{{ item.name }}"
+    state: started
+    enabled: yes
+  loop:
+    - { name: "postgresql", condition: "{{ install_postgresql_server }}" }
+    - { name: "mysql", condition: "{{ install_mysql_server }}" }
+  when: item.condition

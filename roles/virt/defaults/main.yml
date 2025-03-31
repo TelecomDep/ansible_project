@@ -1,0 +1,6 @@
+---
+# Версия VirtualBox (если требуется)
+virtualbox_version: "6.1"
+
+# Релиз дистрибутива (например, "focal" для Ubuntu 20.04)
+distribution_release: "{{ ansible_distribution_release }}"

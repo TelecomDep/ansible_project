@@ -1,0 +1,4 @@
+[template]
+#1. Хостнейм для отображения в работе ansible; 2. IP-адрес хоста; 3. Юзер, от лица которого будут выполнены команд; 4. Путь до SSH-ключа
+
+test ansible_host=192.168.0.1 ansible_user=root ansible_ssh_private_key_file=/root/.ssh/test

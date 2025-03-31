@@ -1,0 +1,53 @@
+---
+- name: Ensure student group exists
+  group:
+    name: "{{ student_group }}"
+    state: present
+
+- name: Create student user
+  user:
+    name: "{{ student_username }}"
+    password: "{{ student_password }}"
+    groups: "{{ student_group }}"
+    shell: /bin/bash
+    append: yes
+    create_home: yes
+    home: "/home/{{ student_username }}"
+
+- name: Restrict student user permissions
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{ student_username }} ALL=(ALL) NOPASSWD: /usr/bin/apt update, /usr/bin/apt upgrade'
+    validate: 'visudo -cf %s'
+
+- name: Ensure student home directory permissions are correct
+  file:
+    path: "/home/{{ student_username }}"
+    owner: "{{ student_username }}"
+    group: "{{ student_group }}"
+    mode: '0750'
+    recurse: yes
+
+- name: Ensure installation directory exists
+  file:
+    path: /home/student/install
+    state: directory
+    mode: '0755'
+
+- name: Настройка xautolock для перехода в сон через {{ sleep_after_inactivity }} минут бездействия
+  copy:
+    dest: /etc/xdg/autostart/xautolock.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Exec=xautolock -time {{ sleep_after_inactivity }} -locker "{{ sleep_command }}"
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+      Name=Xautolock
+      Comment=Automatic sleep after {{ sleep_after_inactivity }} minutes of inactivity
+    mode: '0644'
+
+- name: Notify completion
+  debug:
+    msg: "Student user '{{ student_username }}' has been created and configured."

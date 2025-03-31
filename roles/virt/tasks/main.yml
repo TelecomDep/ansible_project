@@ -1,0 +1,40 @@
+---
+- name: Обновление списка пакетов
+  apt:
+    update_cache: yes
+
+- name: Установка зависимостей
+  apt:
+    name:
+      - curl
+      - wget
+      - gnupg
+    state: present
+
+- name: Добавление ключа GPG для репозитория VirtualBox
+  apt_key:
+    url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+    state: present
+
+- name: Добавление репозитория VirtualBox в sources.list
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.virtualbox.org/virtualbox/debian {{ distribution_release }} contrib"
+    state: present
+
+- name: Обновление списка пакетов после добавления репозитория
+  apt:
+    update_cache: yes
+
+- name: Установка VirtualBox
+  apt:
+    name: virtualbox
+    state: present
+    update_cache: yes
+
+- name: Установка VirtualBox Extension Pack
+  become: yes
+  environment:
+    DEBIAN_FRONTEND: noninteractive
+  shell: |
+    echo virtualbox-ext-pack virtualbox-ext-pack/license select true | debconf-set-selections
+    apt-get install -y virtualbox-ext-pack

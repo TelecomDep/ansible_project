@@ -1,0 +1,107 @@
+---
+- name: Установка QT
+  apt:
+    name:
+      - build-essential
+      - qtcreator
+      - mesa-common-dev
+      - qt5-qmake
+      - cmake
+      - qt5-doc
+      - qt5-doc-html
+      - qtbase5-dev
+      - qtbase5-dev-tools
+      - qtbase5-doc
+      - qtbase5-doc-html
+      - qtbase5-examples
+      - libqt5charts5-dev
+      - qtcharts5-doc
+      - qtcharts5-doc-html
+      - qtcharts5-examples
+    state: present
+    update_cache: yes
+
+- name: Установка Snap
+  apt:
+    name: snapd
+    state: present
+    update_cache: yes
+
+- name: Установка Libre Office + Libre Base
+  apt:
+    name:
+      - libreoffice
+      - libreoffice-base
+    state: present
+    update_cache: yes
+
+#- name: Установка Adobe Acrobat Reader
+#  apt:
+#    name: acroread
+#    state: present
+#    update_cache: yes
+
+- name: Установка VSCode
+  snap:
+    name: code
+    state: present
+    classic: yes
+- name: Установка GIMP
+  apt:
+    name:
+      - gimp
+      - gimp-plugin-registry
+    state: present
+    update_cache: yes
+
+- name: Установка Git
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+
+- name: Установка Htop
+  apt:
+    name: htop
+    state: present
+    update_cache: yes
+
+- name: Установка Traceroute
+  apt:
+    name: traceroute
+    state: present
+    update_cache: yes
+
+- name: Установка Python3
+  apt:
+    name:
+      - python3-pip
+    state: present
+    update_cache: yes
+
+- name: Установка Octave
+  apt:
+    name: octave
+    state: present
+    update_cache: yes
+
+- name: Установка GNU Radio
+  apt:
+    name: gnuradio
+    state: present
+    update_cache: yes
+
+- name: Установка русской раскладки
+  apt:
+    name: language-pack-ru
+    state: present
+    update_cache: yes
+
+- name: Настройка русской раскладки через gsettings
+  command: >
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
+
+- name: Настройка переключения раскладок (Alt+Shift)
+  command: >
+    gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Alt>Shift_L']"
+

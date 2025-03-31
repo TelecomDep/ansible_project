@@ -1,0 +1,39 @@
+---
+- name: Установка необходимых пакетов
+  apt:
+    name:
+      - xautolock
+      - cron
+    state: present
+  become: yes
+
+- name: Добавление задачи выключения в cron
+  cron:
+    name: "Automatic shutdown at 19:00"
+    user: "{{ cron_user }}"
+    job: "{{ shutdown_command }}"
+    minute: "{{ shutdown_time.split()[0] }}"
+    hour: "{{ shutdown_time.split()[1] }}"
+    day: "{{ shutdown_time.split()[2] }}"
+    month: "{{ shutdown_time.split()[3] }}"
+    weekday: "{{ shutdown_time.split()[4] }}"
+
+- name: Настройка xautolock для перехода в сон через {{ sleep_after_inactivity }} минут бездействия
+  copy:
+    dest: /etc/xdg/autostart/xautolock.desktop
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Exec=xautolock -time {{ sleep_after_inactivity }} -locker "{{ sleep_command }}"
+      Hidden=false
+      NoDisplay=false
+      X-GNOME-Autostart-enabled=true
+      Name=Xautolock
+      Comment=Automatic sleep after {{ sleep_after_inactivity }} minutes of inactivity
+    mode: '0644'
+
+- name: Перезагрузка systemd-logind для применения изменений (если требуется)
+  systemd:
+    name: systemd-logind
+    state: restarted
+  when: ansible_service_mgr == "systemd"

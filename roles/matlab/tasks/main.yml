@@ -1,0 +1,70 @@
+---
+- name: update packages
+  apt:
+    update_cache: yes
+
+- name: Обновление установленных пакетов
+  apt:
+    upgrade: dist
+
+
+- name: Установка необходимых пакетов и библиотек
+  apt:
+    name: "{{ required_packages }}"
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Копирование всех архивов на удаленный хост
+  copy:
+    src: "{{ item }}"
+    dest: "{{ install_dir }}/{{ item }}"
+  loop: "{{ matlab_archives }}"
+
+- name: Распаковка архива
+  shell: >
+    unrar x -p{{ archive_password }}
+    "{{ install_dir }}/{{ matlab_archives[0] }}"
+    "{{ install_dir }}/"
+  args:
+    creates: "{{ install_dir }}/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK"
+
+- name: Копирование файла install.txt на удаленный хост
+  copy:
+    src: "files/install.txt"
+    dest: "{{ install_dir }}/install.txt"
+
+- name: Создание директории для монтирования ISO
+  file:
+    path: /tmp/matlab
+    state: directory
+    mode: '0755'
+
+- name: Монтирование ISO образа
+  mount:
+    path: /tmp/matlab
+    src: "{{ install_dir }}/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK/R2024a_Linux.iso"
+    fstype: iso9660
+    opts: loop
+    state: mounted
+
+- name: Установка MATLAB
+  shell: >
+    /tmp/matlab/install -inputFile {{ install_dir }}/install.txt
+  args:
+    chdir: /tmp/matlab
+
+- name: Перемещение файла libmwlmgrimpl.so
+  copy:
+    src: "{{ install_dir }}/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK/Crack/libmwlmgrimpl.so"
+    dest: /opt/MATLAB/bin/glnxa64/matlab_startup_plugins/lmgrimpl/
+    remote_src: yes
+
+- name: Add symlink from MATLAB binary to /usr/local/bin/matlab
+  file:
+    src: /opt/MATLAB/bin/matlab
+    dest: /usr/local/bin/matlab
+    state: link
+
+- name: Выполнение команды xhost +local:student
+  command: xhost +local:student
+  become: yes

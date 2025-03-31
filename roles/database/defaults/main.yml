@@ -1,0 +1,14 @@
+---
+# Установка клиентов
+install_postgresql_client: true
+install_mysql_client: true
+install_sqlite: true
+
+# Установка серверов
+install_postgresql_server: true
+install_mysql_server: true
+
+# Установка инструментов
+install_pgadmin: true
+install_phpmyadmin: true
+install_dbeaver: true

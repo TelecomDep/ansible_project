@@ -1,0 +1,43 @@
+---
+- name: Копирование всех архивов на удаленный хост
+  copy:
+    src: "{{ item }}"
+    dest: "{{ install_dir }}/{{ item }}"
+  loop: "{{ deb_packages }}"
+
+- name: Установка необходимых зависимостей
+  apt:
+    name:
+      - gtk-update-icon-cache
+      - libgtk2.0-0
+      - libxcb-xinerama0
+      - libgl1
+      - expect
+    state: present
+
+- name: Обновление списка пакетов
+  apt:
+    update_cache: yes
+
+- name: Обновление установленных пакетов
+  apt:
+    upgrade: dist
+
+- name: Установка 1.deb
+  command: dpkg -i "{{ install_dir }}/1.deb"
+  ignore_errors: yes
+  register: install_1
+
+- name: Установка 2.deb
+  command: dpkg -i "{{ install_dir }}/2.deb"
+  ignore_errors: yes
+  register: install_2
+
+- name: Установка 822.deb с использованием expect
+  script: files/install_packettracer.exp
+  args:
+    executable: /usr/bin/expect
+
+- name: Устранение проблем с зависимостями
+  command: apt --fix-broken install -y
+
