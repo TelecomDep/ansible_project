@@ -44,9 +44,11 @@ test ansible_host=192.168.0.1 ansible_user=root ansible_ssh_private_key_file=/ro
     - role: virt           # Инструменты виртуализации (VirtualBox/KVM)
     - role: docker         # Установка Docker и Docker Compose
     - role: matlab         # Настройка MATLAB (лицензия, тулбоксы)
-    - role: pct            # Установка Pocket Tracer
+    - role: pct            # Установка Packet Tracer
     - role: time           # Настройка Режима сна
 ```
 Для запуска используется
+```bash
 ansible <Alias хоста/группы> -i hosts.txt <playbook>.yml
-При повторном запуске, для экономии времени, можно закоментировать роли, которые уже были завершены
+```
+При повторном запуске, для экономии времени, можно закоментировать роли, которые уже были завершены.

@@ -35,12 +35,6 @@
     state: present
     update_cache: yes
 
-#- name: Установка Adobe Acrobat Reader
-#  apt:
-#    name: acroread
-#    state: present
-#    update_cache: yes
-
 - name: Установка VSCode
   snap:
     name: code
@@ -101,7 +95,4 @@
   command: >
     gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
 
-- name: Настройка переключения раскладок (Alt+Shift)
-  command: >
-    gsettings set org.gnome.desktop.wm.keybindings switch-input-source "['<Alt>Shift_L']"
 
