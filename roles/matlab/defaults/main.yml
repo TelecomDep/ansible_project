@@ -1,8 +1,8 @@
 # defaults/main.yml
 matlab_archives:
-  - 'MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part1.rar'
-  - 'MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part2.rar'
-  - 'MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part3.rar'
+  - '{{ playbook_dir }}/files/matlab/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part1.rar'
+  - '{{ playbook_dir }}/files/matlab/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part2.rar'
+  - '{{ playbook_dir }}/files/matlab/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK.part3.rar'
 
 install_dir: /home/student/install/
 archive_password: "DownloadDevTools.ir"
@@ -10,7 +10,6 @@ archive_password: "DownloadDevTools.ir"
 required_packages:
   - unrar
   - libc6
-#  - libncurses5
   - libstdc++6
   - libx11-6
   - libxext6
@@ -43,11 +42,8 @@ required_packages:
   - libcurl4
   - libjpeg62
   - libpng16-16
-#  - libtiff5
-#  - libwebkit2gtk-4.0-37
   - openjdk-11-jre
   - libgstreamer-plugins-good1.0-0
   - libgstreamer-plugins-bad1.0-0
-#  - libgstreamer-plugins-ugly1.0-0
   - libgstreamer-plugins-base1.0-dev
   - libgstreamer1.0-dev

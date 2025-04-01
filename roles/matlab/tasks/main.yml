@@ -17,7 +17,7 @@
 - name: Копирование всех архивов на удаленный хост
   copy:
     src: "{{ item }}"
-    dest: "{{ install_dir }}/{{ item }}"
+    dest: "{{ install_dir }}/{{ item | basename }}"
   loop: "{{ matlab_archives }}"
 
 - name: Распаковка архива
@@ -30,7 +30,7 @@
 
 - name: Копирование файла install.txt на удаленный хост
   copy:
-    src: "files/install.txt"
+    src: "{{ playbook_dir }}/files/matlab/install.txt"
     dest: "{{ install_dir }}/install.txt"
 
 - name: Создание директории для монтирования ISO
@@ -66,5 +66,5 @@
     state: link
 
 - name: Выполнение команды xhost +local:student
-  command: xhost +local:student
+  shell: xhost +local:student
   become: yes

@@ -1,7 +1,7 @@
 ---
 deb_packages:
-  - '1.deb'
-  - '2.deb'
-  - '822.deb'
+  - '{{ playbook_dir }}/files/pct/1.deb'
+  - '{{ playbook_dir }}/files/pct/2.deb'
+  - '{{ playbook_dir }}/files/pct/822.deb'
 
 install_dir: "/home/student/install"

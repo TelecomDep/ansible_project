@@ -49,6 +49,6 @@ test ansible_host=192.168.0.1 ansible_user=root ansible_ssh_private_key_file=/ro
 ```
 Для запуска используется
 ```bash
-ansible <Alias хоста/группы> -i hosts.txt <playbook>.yml
+ansible-playbook -l <Alias хоста/группы> -i hosts.txt <playbook>.yml
 ```
 При повторном запуске, для экономии времени, можно закоментировать роли, которые уже были завершены.

@@ -2,7 +2,7 @@
 - name: Копирование всех архивов на удаленный хост
   copy:
     src: "{{ item }}"
-    dest: "{{ install_dir }}/{{ item }}"
+    dest: "{{ install_dir }}/{{ item | basename }}"
   loop: "{{ deb_packages }}"
 
 - name: Установка необходимых зависимостей
@@ -34,10 +34,11 @@
   register: install_2
 
 - name: Установка 822.deb с использованием expect
-  script: files/install_packettracer.exp
+  script: "{{ playbook_dir }}/files/pct/install_packettracer.exp"
   args:
     executable: /usr/bin/expect
 
 - name: Устранение проблем с зависимостями
   command: apt --fix-broken install -y
+  ignore_errors: yes
 
