@@ -17,6 +17,9 @@ jobs:
       - name: Install Ansible
         run: pip install ansible
 
+      - name: Install ansible-lint
+        run: pip install ansible-lint
+
       - name: Lint with ansible-lint
         run: |
           ansible-lint deploy_software.yml
@@ -29,8 +32,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ansible
-        run: pip install ansible
-
       - name: Run playbook in check mode (dry-run)
-        run: ansible-playbook site.yml --check --diff
+        run: ansible-playbook deploy_software.yml --check --diff
