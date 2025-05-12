@@ -1,6 +1,6 @@
 ---
 - name: Установка QT
-  ansible.builtin.apt:
+  apt:
     name:
       - build-essential
       - qtcreator
@@ -19,93 +19,103 @@
       - qtcharts5-doc-html
       - qtcharts5-examples
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Snap
-  ansible.builtin.apt:
+  apt:
     name: snapd
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Libre Office + Libre Base
-  ansible.builtin.apt:
+  apt:
     name:
       - libreoffice
       - libreoffice-base
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка VSCode
-  community.general.snap:
+  snap:
     name: code
     state: present
-    classic: true
+    classic: yes
 
 - name: Установка Android-studio
-  community.general.snap:
+  snap:
     name: android-studio
     state: present
-    classic: true
+    classic: yes
 
-- name: Установка PyCharm
-  community.general.snap:
-    name: pycharm-community
+- name: Установка VSCode
+  snap:
+    name: pycharm
     state: present
-    classic: true
+    classic: yes
 
-- name: Установка IntelijIDEA Community
-  community.general.snap:
-    name: intellij-idea-community
+- name: Установка VSCode
+  snap:
+    name: 
     state: present
-    classic: true
+    classic: yes
+
+
+
+
 
 - name: Установка GIMP
-  ansible.builtin.apt:
+  apt:
     name:
       - gimp
       - gimp-plugin-registry
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Git
-  ansible.builtin.apt:
+  apt:
     name: git
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Htop
-  ansible.builtin.apt:
+  apt:
     name: htop
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Traceroute
-  ansible.builtin.apt:
+  apt:
     name: traceroute
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Python3
-  ansible.builtin.apt:
+  apt:
     name:
       - python3-pip
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка Octave
-  ansible.builtin.apt:
+  apt:
     name: octave
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка GNU Radio
-  ansible.builtin.apt:
+  apt:
     name: gnuradio
     state: present
-    update_cache: true
+    update_cache: yes
 
 - name: Установка русской раскладки
-  ansible.builtin.apt:
+  apt:
     name: language-pack-ru
     state: present
-    update_cache: true
+    update_cache: yes
+
+- name: Настройка русской раскладки через gsettings
+  command: >
+    gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
+
+
