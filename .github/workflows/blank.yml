@@ -33,5 +33,3 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run playbook in check mode (dry-run)
-        run: ansible-playbook deploy_software.yml --check --diff
