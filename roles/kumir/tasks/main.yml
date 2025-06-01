@@ -1,0 +1,86 @@
+---
+- name: Установка системных зависимостей
+  apt:
+    name:
+      - build-essential
+      - cmake
+      - gdb
+      - qtscript5-dev
+      - libqt5scripttools5
+      - libqt5script5
+      - git
+      - libqt5multimedia5-plugins
+      - libqt5network5
+      - libqt5widgets5
+      - libqt5svg5-dev
+      - libssl-dev
+      - qttools5-dev-tools
+      - qtmultimedia5-dev
+      - libqt5webkit5-dev
+      - libsdl2-dev
+      - libasound2
+      - libxmu-dev
+      - libxi-dev
+      - freeglut3-dev
+      - libasound2-dev
+      - libjack-jackd2-dev
+      - libxrandr-dev
+      - libqt5xmlpatterns5-dev
+      - libqt5xmlpatterns5
+      - libzip-dev
+      - libyaml-cpp-dev
+      - qtbase5-dev
+      - qttools5-dev
+      - libx11-dev
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+      - libgl1-mesa-dev
+      - libicu-dev
+      - libqt5x11extras5-dev
+    state: present
+    update_cache: yes
+
+- name: Создание директории для установки
+  file:
+    path: "{{ kumir_install_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Копирование архива Kumir2 на хост
+  copy:
+    src: "kumir2.tar.gz"
+    dest: "/tmp/kumir2.tar.gz"
+
+- name: Распаковка архива
+  unarchive:
+    src: "/tmp/kumir2.tar.gz"
+    dest: "{{ kumir_install_dir }}"
+    remote_src: yes
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Создание директории сборки
+  file:
+    path: "{{ kumir_build_dir }}"
+    state: directory
+
+- name: Запуск CMake
+  command:
+    cmd: cmake -DCMAKE_BUILD_TYPE=Release -DUSE_QT=5 ..
+    chdir: "{{ kumir_build_dir }}"
+
+- name: Сборка Kumir2
+  make:
+    chdir: "{{ kumir_build_dir }}"
+    jobs: "{{ ansible_processor_vcpus }}"
+
+- name: Установка Kumir2
+  make:
+    chdir: "{{ kumir_build_dir }}"
+    target: install
+
+- name: Удаление временного архива
+  file:
+    path: "/tmp/kumir2.tar.gz"
+    state: absent

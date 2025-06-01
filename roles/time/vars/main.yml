@@ -1,6 +1,0 @@
----
-# Команда для выключения
-shutdown_command: "/sbin/shutdown -h now"
-
-# Команда для перехода в сон
-sleep_command: "systemctl suspend"
