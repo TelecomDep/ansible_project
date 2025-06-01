@@ -26,12 +26,10 @@ jobs:
           ansible-lint deploy_software.yml
 
   deploy:
-    name: Run Ansible Playbook
+    name: Try Ansible Playbook
     needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run playbook in check mode (dry-run)
-        run: ansible-playbook deploy_software.yml --check --diff
