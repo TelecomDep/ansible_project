@@ -47,9 +47,10 @@ test ansible_host=192.168.0.1 ansible_user=root ansible_ssh_private_key_file=/ro
     - role: pct            # Установка Packet Tracer
     - role: time           # Настройка Режима сна
 ```
+Для ролей Matlab, Kumir и Packet Tracer требуется директория files с файлами для установки.
+
 Для запуска используется
 ```bash
 ansible-playbook -l <Alias хоста/группы> -i hosts.txt <playbook>.yml
 ```
-Для запуска ролей Matlab, Kumir и Packet Tracer требуется директория files с файлами для установки.
 При повторном запуске, для экономии времени, можно закоментировать роли, которые уже были завершены.
