@@ -34,7 +34,7 @@
   register: install_2
 
 - name: Установка 822.deb с использованием expect
-  script: "{{ playbook_dir }}/files/pct/install_packettracer.exp"
+  script: "{{ playbook_dir }}/files/install_packettracer.exp"
   args:
     executable: /usr/bin/expect
 

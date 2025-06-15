@@ -40,12 +40,6 @@
     state: present
     update_cache: yes
 
-- name: Создание директории для установки
-  file:
-    path: "{{ kumir_install_dir }}"
-    state: directory
-    mode: '0755'
-
 - name: Копирование архива Kumir2 на хост
   copy:
     src: "kumir2.tar.gz"

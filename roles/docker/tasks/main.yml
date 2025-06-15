@@ -43,6 +43,12 @@
     groups: docker
     append: yes
 
+- name: Add current user to the docker group
+  user:
+    name: student
+    groups: docker
+    append: yes
+
 - name: Install Docker Compose
   get_url:
     url: "https://github.com/docker/compose/releases/download/v{{ docker_compose_version }}/docker-compose-linux-x86_64"

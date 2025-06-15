@@ -1,6 +1,6 @@
 ---
 # Путь к директории установки
-kumir_install_dir: /opt/kumir2
+kumir_install_dir: /opt/
 
 # Путь к директории сборки
-kumir_build_dir: "{{ kumir_install_dir }}/build"
+kumir_build_dir: "{{ kumir_install_dir }}/kumir2/build"

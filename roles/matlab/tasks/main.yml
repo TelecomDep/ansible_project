@@ -23,14 +23,14 @@
 - name: Распаковка архива
   shell: >
     unrar x -p{{ archive_password }}
-    "{{ install_dir }}/{{ matlab_archives[0] }}"
+    "{{ install_dir }}/{{ matlab_archives[0] | basename }}"
     "{{ install_dir }}/"
   args:
     creates: "{{ install_dir }}/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK"
 
 - name: Копирование файла install.txt на удаленный хост
   copy:
-    src: "{{ playbook_dir }}/files/matlab/install.txt"
+    src: "{{ playbook_dir }}/files/install.txt"
     dest: "{{ install_dir }}/install.txt"
 
 - name: Создание директории для монтирования ISO
