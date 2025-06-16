@@ -3,11 +3,11 @@
   hosts: all
   become: true
   roles:
-#    - role: student
-#    - role: base_soft
-#    - role: database
-#    - role: virt
-#    - role: docker
-#    - role: matlab
-#    - role: pct
+    - role: student
+    - role: base_soft
+    - role: database
+    - role: virt
+    - role: docker
+    - role: matlab
+    - role: pct
     - role: kumir
