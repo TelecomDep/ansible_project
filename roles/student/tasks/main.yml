@@ -34,6 +34,38 @@
     state: directory
     mode: "0755"
 
+- name: Creating user profile for dconf
+  copy:
+    dest: "/etc/dconf/profile/user"
+    content: |
+      user-db:user
+      system-db:local
+
+- name: Creates directory
+  ansible.builtin.file:
+    path: /etc/dconf/db/local.d/locks
+    state: directory
+
+- name: create a config file under local.d
+  copy:
+    dest: "/etc/dconf/db/local.d/00-lockdown"
+    content: |
+      [org/gnome/desktop/background]
+      picture-uri='file:///usr/share/backgrounds/warty-final-ubuntu.png'
+      [org/gnome/desktop/lockdown]
+      disable-printing=true
+
+- name:  List the keys you want to lock in config file 
+  copy:
+    dest: "/etc/dconf/db/local.d/locks/lockdown"
+    content: |
+      /org/gnome/desktop/background/picture-uri
+      /org/gnome/desktop/lockdown/disable-printing
+
+- name: Update dconf databases
+  ansible.builtin.command: dconf update
+  become: true # Use 'become: true' if dconf update requires elevated privileges
+
 - name: Notify completion
   ansible.builtin.debug:
     msg: "Student user '{{ student_username }}' has been created and configured."

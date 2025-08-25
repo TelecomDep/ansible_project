@@ -65,6 +65,6 @@
     dest: /usr/local/bin/matlab
     state: link
 
-- name: Выполнение команды xhost +local:student
-  shell: xhost +local:student
-  become: yes
+# - name: Выполнение команды xhost +local:student
+#   shell: xhost +local:student
+#   become: yes

@@ -42,7 +42,7 @@
 
 - name: Копирование архива Kumir2 на хост
   copy:
-    src: "kumir2.tar.gz"
+    src: "{{ playbook_dir }}/files/kumir2.tar.gz"
     dest: "/tmp/kumir2.tar.gz"
 
 - name: Распаковка архива
