@@ -8,6 +8,6 @@
     - role: database
     - role: virt
     - role: docker
-    - role: kumir
-    - role: matlab
-      # - role: pct~
+    # - role: kumir
+    # - role: matlab
+    # - role: pct~
