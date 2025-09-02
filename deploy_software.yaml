@@ -7,7 +7,12 @@
     - role: base_soft
     - role: database
     - role: virt
-    - role: docker
-    # - role: kumir
-    # - role: matlab
+    - role: docker 
+    - role: change_ssh
+    - role: matlab
+    - role: power_off_idle # this should be executed LAST!!!!!!
+
+
+
     # - role: pct~
+    # - role: kumir

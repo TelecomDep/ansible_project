@@ -1,0 +1,3 @@
+[submodule "Kumir2"]
+	path = files/kumir2
+	url = https://github.com/TelecomDep/kumir2.git

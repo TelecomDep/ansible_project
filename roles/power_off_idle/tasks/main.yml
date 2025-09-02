@@ -1,0 +1,25 @@
+---
+- name: Ensure IdleAction is set to poweroff in logind.conf
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: '^#?IdleAction='
+    line: 'IdleAction=poweroff'
+    state: present
+
+- name: Ensure IdleActionSec is set to 120min in logind.conf
+  ansible.builtin.lineinfile:
+    path: /etc/systemd/logind.conf
+    regexp: '^#?IdleActionSec='
+    line: 'IdleActionSec=120min'
+    state: present
+
+- name: restart systemd-logind
+  ansible.builtin.systemd:
+    name: systemd-logind
+    state: restarted
+
+- name: Shut down the system immediately
+  ansible.builtin.shell: shutdown -h now "Ansible initiated immediate shutdown"
+  async: 1 # Run the command asynchronously
+  poll: 0 # Do not poll for completion, allowing Ansible to disconnect
+  ignore_errors: true # Ignore errors, as the connection will be lost during shutdown

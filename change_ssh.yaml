@@ -1,0 +1,6 @@
+---
+- name: Set up SSH
+  hosts: all
+  become: true
+  roles:
+    - role: change_ssh

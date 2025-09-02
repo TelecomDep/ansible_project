@@ -1,0 +1,29 @@
+---
+- name: Копирование sshd_config на хост
+  copy:
+    src: "{{ playbook_dir }}/files/sshd_config"
+    dest: "/etc/ssh/"
+    force: yes
+
+- name: Execute a Bash command
+  ansible.builtin.shell: |
+    process_id=$!
+    ufw allow 2222/tcp
+    wait $process_id
+    ufw reload
+    wait $process_id
+    systemctl restart ssh
+    wait $process_id
+
+
+- name: Копирование config на хост
+  copy:
+    src: "{{ playbook_dir }}/files/config"
+    dest: "/home/student/.ssh/"
+    force: yes
+
+- name: Копирование config на хост
+  copy:
+    src: "{{ playbook_dir }}/files/config"
+    dest: "/home/tsvs/.ssh/"
+    force: yes

@@ -1,0 +1,6 @@
+destinationFolder=/opt/MATLAB
+agreeToLicense=yes
+mode=silent
+fileInstallationKey=21471-07182-41807-00726-32378-34241-61866-60308-44209-03650-51035-48216-24734-36781-57695-35731-64525-44540-57877-31100-06573-50736-60034-42697-39512-63953
+licensePath=/home/student/install/MathWorks MATLAB R2024a 24.1.0.2568132 for Linux + CRACK/License/license.lic
+product.all

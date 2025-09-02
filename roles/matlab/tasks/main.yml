@@ -18,6 +18,7 @@
   copy:
     src: "{{ item }}"
     dest: "{{ install_dir }}/{{ item | basename }}"
+    force: no
   loop: "{{ matlab_archives }}"
 
 - name: Распаковка архива
