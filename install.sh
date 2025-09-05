@@ -29,9 +29,9 @@ wait $process_id
 
 # Если захотим моенять порт для SSH, меняем в files/sshd_config и запускаем этот скрипт
 # Затем меняем ansible_port в запуске следующего playbook.
-echo "PID: $process_id"
-ansible-playbook -i "$INVENTORY_FILE" "$PLAYBOOK_SSH_PATH" --extra-vars "debug_mode=true"
-wait $process_id
+# echo "PID: $process_id"
+# ansible-playbook -i "$INVENTORY_FILE" "$PLAYBOOK_SSH_PATH" --extra-vars "debug_mode=true"
+# wait $process_id
 
 echo "PID: $process_id"
 ansible-playbook -i "$INVENTORY_FILE" "$PLAYBOOK_PATH" --extra-vars "debug_mode=true ansible_port=22"
