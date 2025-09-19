@@ -34,7 +34,7 @@ wait $process_id
 # wait $process_id
 
 echo "PID: $process_id"
-ansible-playbook -i "$INVENTORY_FILE" "$PLAYBOOK_PATH" --extra-vars "debug_mode=true ansible_port=22"
+ansible-playbook -i "$INVENTORY_FILE" "$PLAYBOOK_PATH" --extra-vars "debug_mode=true"
 wait $process_id
 
 echo "Install script = Done"
