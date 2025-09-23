@@ -1,0 +1,5 @@
+---
+pluto_username: "plutoSDR"
+pluto_password: "{{ 'pass' | password_hash('sha512') }}"
+pluto_group: "plutoSDR"
+pluto_create: true

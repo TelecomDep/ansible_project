@@ -11,6 +11,7 @@
     # - role: change_ssh
     # - role: matlab
     # - role: power_off_idle # this should be executed LAST!!!!!!
+    - role: pluto_sdr_user
 
 
 

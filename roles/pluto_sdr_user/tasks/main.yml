@@ -1,0 +1,15 @@
+---
+- name: Ensure pluto group exists
+  ansible.builtin.group:
+    name: "{{ pluto_group }}"
+    state: present
+
+- name: Create student user
+  ansible.builtin.user:
+    name: "{{ pluto_username }}"
+    password: "{{ pluto_password }}"
+    groups: sudo
+    shell: /bin/bash
+    append: true
+    create_home: true
+    home: "/home/{{ pluto_username }}"
