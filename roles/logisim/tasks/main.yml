@@ -1,0 +1,10 @@
+---
+- name: Установка Snap
+  ansible.builtin.apt:
+    name: snapd
+    state: present
+    update_cache: true
+
+- name: Установка logisim-evolution
+  shell: |
+    sudo snap install logisim-evolution-snapcraft

@@ -10,8 +10,9 @@
     # - role: docker 
     # - role: change_ssh
     # - role: matlab
+    - role: logisim
     # - role: power_off_idle # this should be executed LAST!!!!!!
-    - role: pluto_sdr_user
+    # - role: pluto_sdr_user
 
 
 

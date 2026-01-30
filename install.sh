@@ -3,8 +3,8 @@
 PLAYBOOK_PATH="deploy_software.yaml"
 PLAYBOOK_SSH_PATH="change_ssh.yaml"
 INVENTORY_FILE="inventory.ini"
-INSTALL_PATH="/home/tsvs/ansible"
-INSTALL_USER=tsvs
+INSTALL_PATH="/home/nsk/ansible"
+INSTALL_USER=nsk
 
 # Создание директории 
 echo "Создание директории ..."
