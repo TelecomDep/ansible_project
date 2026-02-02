@@ -63,11 +63,11 @@
     state: present
     classic: true
 
-- name: Установка PyCharm
-  community.general.snap:
-    name: pycharm-community
-    state: present
-    classic: true
+# - name: Установка PyCharm
+#   community.general.snap:
+#     name: pycharm-community
+#     state: present
+#     classic: true
 
 - name: Установка IntelijIDEA Community
   community.general.snap:

@@ -4,15 +4,15 @@
   become: true
   roles:
     # - role: student
-    # - role: base_soft
-    # - role: database
-    # - role: virt
-    # - role: docker 
-    # - role: change_ssh
-    # - role: matlab
+    - role: base_soft
+    - role: database
+    - role: virt
+    - role: docker 
+    - role: change_ssh
     - role: logisim
-    # - role: power_off_idle # this should be executed LAST!!!!!!
+    - role: power_off_idle # this should be executed LAST!!!!!!
     # - role: pluto_sdr_user
+    # - role: matlab
 
 
 

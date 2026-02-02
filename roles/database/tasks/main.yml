@@ -30,11 +30,11 @@
     state: present
   when: install_phpmyadmin
 
-- name: Install DBeaver (if enabled)
-  community.general.snap:
-    name: "dbeaver-ce"
-    state: present
-  when: install_dbeaver
+# - name: Install DBeaver (if enabled)
+#   community.general.snap:
+#     name: "dbeaver-ce"
+#     state: present
+#   when: install_dbeaver
 
 - name: Ensure services are running (if applicable)
   service:
