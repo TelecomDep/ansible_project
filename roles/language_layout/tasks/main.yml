@@ -1,0 +1,29 @@
+---
+- name:
+  apt:
+    name:
+      - language-pack-ru
+      - language-pack-gnome-ru
+      - language-pack-kde-ru
+      - libreoffice-l10n-ru
+      - libreoffice-help-ru
+    state: present
+    update_cache: yes
+
+- name: Обновление языка
+  shell: |
+    sudo update-locale LANG=ru_RU.UTF-8
+
+- name: Установка Libre Office + Libre Base
+  ansible.builtin.apt:
+    name:
+      - libreoffice
+      - libreoffice-base
+    state: present
+    update_cache: true
+
+- name: Установка русской раскладки
+  ansible.builtin.apt:
+    name: language-pack-ru
+    state: present
+    update_cache: true

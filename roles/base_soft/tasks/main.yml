@@ -21,22 +21,6 @@
     state: present
     update_cache: true
 
-- name:
-  apt:
-    name:
-      - language-pack-ru
-      - language-pack-gnome-ru
-      - language-pack-kde-ru
-      - libreoffice-l10n-ru
-      - libreoffice-help-ru
-    state: present
-    update_cache: yes
-
-
-- name: Обновление языка
-  shell: |
-    sudo update-locale LANG=ru_RU.UTF-8
-
 - name: Установка Snap
   ansible.builtin.apt:
     name: snapd
@@ -95,6 +79,36 @@
     state: present
     update_cache: true
 
+- name: Установка Nettools
+  ansible.builtin.apt:
+    name: net-tools
+    state: present
+    update_cache: true
+
+- name: Установка wireshark
+  ansible.builtin.apt:
+    name: wireshark
+    state: present
+    update_cache: true
+
+- name: Установка tcpdump
+  ansible.builtin.apt:
+    name: tcpdump
+    state: present
+    update_cache: true
+
+- name: Установка dnsutils
+  ansible.builtin.apt:
+    name: dnsutils
+    state: present
+    update_cache: true
+
+# - name: Даем студенту права на Wireshark
+#   shell: |
+#     sudo dpkg-reconfigure wireshark-common
+#     sudo chmod +x /usr/bin/dumpcap
+#     sudo usermod -a -G wireshark student
+
 - name: Установка Traceroute
   ansible.builtin.apt:
     name: traceroute
@@ -105,6 +119,7 @@
   ansible.builtin.apt:
     name:
       - python3-pip
+      - idle-python3.11
     state: present
     update_cache: true
 
@@ -117,12 +132,6 @@
 - name: Установка GNU Radio
   ansible.builtin.apt:
     name: gnuradio
-    state: present
-    update_cache: true
-
-- name: Установка русской раскладки
-  ansible.builtin.apt:
-    name: language-pack-ru
     state: present
     update_cache: true
 

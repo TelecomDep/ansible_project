@@ -3,18 +3,16 @@
   hosts: all
   become: true
   roles:
-    # - role: student
+    - role: student
     - role: base_soft
+    - role: language_layout
     - role: database
     - role: virt
     - role: docker 
     - role: change_ssh
     - role: logisim
-    - role: power_off_idle # this should be executed LAST!!!!!!
     # - role: pluto_sdr_user
     # - role: matlab
-
-
-
-    # - role: pct~
+    # - role: pct
     # - role: kumir
+    - role: power_off_idle # this should be executed LAST!!!!!!
