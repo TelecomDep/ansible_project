@@ -1,0 +1,9 @@
+---
+# repository URL
+yabrowser_deb_source: "deb [arch=amd64] https://repo.yandex.ru/yandex-browser/deb stable main"
+
+# package name(can be 'yandex-browser-stable' or 'yandex-browser-beta')
+yabrowser_package: "yandex-browser-stable"
+
+# gpg key
+yabrowser_gpg_key_url: "https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG"

@@ -1,0 +1,5 @@
+---
+- name: Выключить хост с задержкой в 10 секунд
+  community.general.shutdown:
+    delay: 10
+    msg: "Сервер выключается через Ansible!"
